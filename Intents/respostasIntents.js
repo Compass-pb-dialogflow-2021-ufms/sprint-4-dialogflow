@@ -13,10 +13,10 @@ module.exports = {
       try {
         const dados = req.body.originalDetectIntentRequest.payload.data;
         const id = dados.from.id;
-        const resposta = await fetch(`https://c22c-45-237-255-214.ngrok.io/api/bd/${id}`);
+        const resposta = await fetch(`https://projeto-sprint-four-one.herokuapp.com/api/bd/${id}`);
         const data = await resposta.json();
         if (data === null) {
-          await fetch(`https://c22c-45-237-255-214.ngrok.io/api/bd/adicionar`, {
+          await fetch(`https://projeto-sprint-four-one.herokuapp.com/api/bd/adicionar`, {
             method: "post",
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
@@ -41,7 +41,7 @@ module.exports = {
   async cotacaoReal() {
     let data = {};
     try {
-      const resposta = await fetch(`https://c22c-45-237-255-214.ngrok.io/api/externa`);
+      const resposta = await fetch(`https://projeto-sprint-four-one.herokuapp.com/api/externa`);
       data = await resposta.json();
     } catch (error) {
       console.log(erro);
@@ -88,7 +88,7 @@ module.exports = {
     const codigo = moeda + moeda2;
     let data = {};
     try {
-      const resposta = await fetch(`https://c22c-45-237-255-214.ngrok.io/api/externa/conversao/?moeda=${moeda}&moeda2=${moeda2}`);
+      const resposta = await fetch(`https://projeto-sprint-four-one.herokuapp.com/api/externa/conversao/?moeda=${moeda}&moeda2=${moeda2}`);
       data = await resposta.json();
       return `${data[codigo].name}\n${valor} ${moeda} = ${(valor * data[codigo].bid).toFixed(2)} ${moeda2}\nUltima atualização da cotação: ${this.timestampParaData(data[codigo].timestamp)}
       \nDigite "Menu" para ver meus serviços`;
