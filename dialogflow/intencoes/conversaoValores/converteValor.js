@@ -6,12 +6,21 @@ const outrasMoedas = require('./outrasMoedas')
 async function converteValor(req, res)
 {
     //variáveis
-    let text
+    let text, moedaOriginal, moedaConverter, valorConverter
     const parametros = req.body.queryResult.parameters
     const values = Object.values(parametros) 
-    let moedaOriginal = values[1].currency
-    let moedaConverter = values[0][0]
-    const valorConverter = values[1].amount
+    if(typeof values[0][0] == 'string')
+    {
+        moedaOriginal = values[1].currency
+        moedaConverter = values[0][0]
+        valorConverter = values[1].amount
+    }
+    else
+    {
+        moedaOriginal = values[0].currency
+        moedaConverter = values[1][0]
+        valorConverter = values[0].amount
+    }
 
 
     if(moedaOriginal == moedaConverter)
