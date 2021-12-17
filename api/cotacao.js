@@ -132,7 +132,7 @@ async function converter(req, res) {
             "fulfillmentMessages": [{
                 "text": {
                     "text": [
-                        `${quantidade} ${moedas[0]} = ${formatter(converter[moeda1].bid * quantidade)} ${moedas[1]}\n ${quantidade} ${moedas[1]} = ${formatter(converter[moeda2].bid * quantidade)} ${moedas[0]}`
+                        `${quantidade} ${moedas[0]} = ${formatter(converter[moeda1].bid * quantidade)} ${moedas[1]}\n${quantidade} ${moedas[1]} = ${formatter(converter[moeda2].bid * quantidade)} ${moedas[0]}`
                     ]
                 }
             }]
