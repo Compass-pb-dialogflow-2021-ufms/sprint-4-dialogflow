@@ -86,3 +86,69 @@ Você tem total liberdade para fazer o projeto da forma que achar melhor. Além 
 
 ## Entrega
 13:00 - 17/12/2021
+
+
+----
+
+## Diário de bordo.
+
+A princípio foquei em entender como trabalhar com o payload puro, já que esse era o principal desafio e aprendizado para mim nesse projeto.
+Após isso foquei em fazer uma boa estrutura de diretórios para que tudo ficasse bem organizado.
+
+Uma vez estabelecida a comunicação entre a API de consulta e o banco de dados pude focar no fluxo de conversa das intents.
+
+A Default Welcome Intent me despendeu algum tempo já que deveria reconhecer um usuário antigo e para isso fiz um pequeno sistema de cadastro.
+
+As demais intents (Ajuda, Cotação e Conversão) por sua vez foram rápidas e sem grandes dificuldades, exceto pelo detalhe que por conta de uma instabilidade da API de consulta o resultado de operações com Bitcoin não está muito preciso.
+
+Os testes de conversação por sua vez despenderam bastante tempo, e serviram para aprimorar as frases de treinamento do bot.
+
+## Tecnologias
+
+- Express -> Responsável por gerenciar as requisições da aplicação.
+- Axios -> Responsável pela comunicação entre a API de consulta.
+- Mongoose -> Driver responsavel pela comunicação entra o banco de dados.
+- Nodemon -> Ferramentaa utilizada para apoiar no desenvolvimento
+- Dotenv -> Responsável por gerenciar as variáveis de ambiente.
+
+## Aplicação
+
+Para realizar qualquer mudança de desenvolvimento será necessario ter <a href="https://nodejs.org/pt-br/">Node</a>.
+Então basta clonar o repositório e rodar o comando "npm install".
+
+O padrão de projeto é uma abstração do modelo MVC.
+
+- Pacotes
+  - API -> comunicação com a API de consulta.
+  - database -> comunicação com o banco de dados.
+  - routes -> rotas da aplicação.
+  - models -> modelos de entidades.
+  - controllers -> controladores de entidades.
+  - util -> utilitários.
+
+## Bot
+
+- Intents:
+
+  - Default Welcome Intent -> Mensagem de boas vindas, também responsável por resconhecer o usuário. Caso for o primeiro contato do usuário com o bot, será feito um pequeno cadastro.
+  - Default Fallback Intent -> Caso o bot não entenda o que foi falado, seja por erro de digitação ou péla mensagem estar fora de escopo, será retornado uma mensagem que sugestionará o usuário a entrar em na Ajuda Intent.
+  - Ajuda Intent -> O bot retorna uma mensagem explicando suas funcionalidades ao usuário.
+  - Cotação Intent -> O bot retorna, em reais, a cotação do Dólar, Euro, Iene e Bitcoin.
+  - Conversão Intent -> O bot retorna a relação câmbial entre duas moedas, podendo estas serem Real, Dolar, Euro, Iene ou Bitcoin.
+  
+Um exemplo de uma conversa com o bot é:
+
+    - usuario -> oi
+    - bot -> Olá, estou aqui para te ajudar nas converções monetárias.
+             
+             Mas antes me informe seu nome para que possamos conversar melhor.
+    - usuario -> Tiago
+    - bot -> Como é sua primeira vez utilizando o sistema vou me introduzir.
+
+             Sou o seu assistente pessoal para cotações e converções monetárias, posso te informar quanto o dólar está valendo hoje por exemplo.
+             Mas para verificar com mais detalhes todas minhas funções é so digitar ajuda ou pedir pelo menu.
+    - usuario -> Qual a cotação do dolar ?
+    - bot -> Tiago a cotação do Dólar Americano está em R$ 5.70.
+
+- Integração
+  - O bot está disponivel pelo line, para acessa-lo será preciso ter uma conta no <a ref="https://line.me/en/">LINE</a>. Após a criação de conta você deverá ir em Adicionar amigos -> Perquisar, e procurar pelo código @931ilxyf.
