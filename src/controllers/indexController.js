@@ -1,9 +1,10 @@
 const usuariosController = require('./usuariosController')
 const API = require('../API/connection')
+const { endpointBuilder, valueExtractor } = require('../util/index')
 
 const catchText = {
     fulfillmentText: [
-        'Oh não, parece que um de nossos serviços está fora do ar !!!\n'
+          'Oh não, parece que um de nossos serviços está fora do ar !!!\n'
         + 'Por favor tente novamente mais tarde.'
     ]
 }
@@ -40,7 +41,7 @@ const defaultWelcomeIntent = async (req, res, userId) => {
         } else if (userNome && userNome !== '') {
             response = {
                 fulfillmentText: [
-                    'Como é sua primeira vez utilizando o sistema vou me introduzir.\n\n'
+                      'Como é sua primeira vez utilizando o sistema vou me introduzir.\n\n'
                     + 'Sou o seu assistente pessoal para cotações e converções monetárias, posso te informar quanto o dólar está valendo hoje por exemplo.\n'
                     + 'Mas para verificar com mais detalhes todas minhas funções é so digitar ajuda ou pedir pelo menu.'
                 ]
@@ -50,7 +51,7 @@ const defaultWelcomeIntent = async (req, res, userId) => {
         }else {
             response = {
                 fulfillmentText: [
-                    'Olá, estou aqui para te ajudar nas converções monetárias.\n\n'
+                      'Olá, estou aqui para te ajudar nas converções monetárias.\n\n'
                     + 'Mas antes me informe seu nome para que possamos conversar melhor.'
                 ]
             }
@@ -65,7 +66,7 @@ const defaultWelcomeIntent = async (req, res, userId) => {
 const defaultFallbackIntent = (req, res) => {
     const response = {
         fulfillmentText: [
-            `Desculpe ${usuariosController.getNome()} mas eu não entendi.\n`
+              `Desculpe ${usuariosController.getNome()} mas eu não entendi.\n`
             + 'Se estiver com dificuldades é so digitar ajuda ou pedir pelo menu.'
         ]
     }
@@ -76,7 +77,7 @@ const defaultFallbackIntent = (req, res) => {
 const ajudaIntent = (req, res) => {
     const response = {
         fulfillmentText: [
-            `${usuariosController.getNome()} para te ajudar vou te explicar minhas funcionalidades.\n\n`
+              `${usuariosController.getNome()} para te ajudar vou te explicar minhas funcionalidades.\n\n`
             + 'Cotação:\n'
             + 'Aqui eu respondo a cotação atual de algumas moedas (Dólar Americano, Euro, Iene e Bitcoin) que por padrão será em Reais.\n'
             + 'Mas também é possivel saber a cotação nessas outras moedas, basta pedir a conversão para a moeda que deseja.\n\n'
@@ -128,7 +129,7 @@ const cotacaoIntent = async (req, res) => {
         } else {
             response = {
                 fulfillmentText: [
-                    `${usuariosController.getNome()} na sua última mensagem não consegui entender para qual moeda deseja saber a cotação.\n`
+                      `${usuariosController.getNome()} na sua última mensagem não consegui entender para qual moeda deseja saber a cotação.\n`
                     + 'Poderia repetir por favor ?'
                 ]
             }
@@ -141,8 +142,50 @@ const cotacaoIntent = async (req, res) => {
 
 }
 
-const conversaoIntent = (req, res) => {
+const conversaoIntent = async (req, res) => {
+    try {
+        let response
 
+        let   endpoint
+            , apiResponse
+            , fator
+        const   moeda_um    = req.body.queryResult.parameters.moeda_um
+              , moeda_dois  = req.body.queryResult.parameters.moeda_dois
+              , valor       = req.body.queryResult.parameters.valor
+        if (moeda_um !== '') {
+            endpoint = endpointBuilder(moeda_um, moeda_dois)
+            apiResponse = await API.get(endpoint)
+            fator = valueExtractor(moeda_um, moeda_dois, apiResponse)
+
+            if (valor == 1) {
+                response = {
+                    fulfillmentText: [
+                          `${usuariosController.getNome()}, vi aqui que você não informou a quantidade de ${moeda_um} que deseja converter.\n`
+                        + `Mas não vou te deixar na mão, a cotação da ${moeda_um} em ${moeda_dois} está em ${(fator*1).toFixed(2)}.\n\n`
+                        + 'Posso te ajudar em algo mais ?'
+                    ]
+                }
+            } else {
+                response = {
+                    fulfillmentText: [
+                          `${usuariosController.getNome()}, a conversão em ${moeda_dois} deu ${(fator*valor).toFixed(2)}.\n\n`
+                        + 'Posso te ajudar em algo mais ?'
+                    ]
+                }
+            }
+        } else {
+            response = {
+                fulfillmentText: [
+                      `${usuariosController.getNome()} na sua última mensagem não consegui entender para qual moeda deseja saber a conversão.\n`
+                    + 'Poderia repetir por favor ?'
+                ]
+            }
+        }
+
+        res.send(response)
+    } catch {
+        res.send(catchText)
+    }
 }
 
 const main = async (req, res) => {
