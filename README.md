@@ -151,4 +151,4 @@ Um exemplo de uma conversa com o bot é:
     - bot -> Tiago a cotação do Dólar Americano está em R$ 5.70.
 
 - Integração
-  - O bot está disponivel pelo line, para acessa-lo será preciso ter uma conta no <a ref="https://line.me/en/">LINE</a>. Após a criação de conta você deverá ir em Adicionar amigos -> Perquisar, e procurar pelo código @931ilxyf.
+  - O bot está disponivel pelo line, para acessa-lo será preciso ter uma conta no <a href="https://line.me/en/">LINE</a>. Após a criação de conta você deverá ir em Adicionar amigos -> Perquisar, e procurar pelo código @931ilxyf.
