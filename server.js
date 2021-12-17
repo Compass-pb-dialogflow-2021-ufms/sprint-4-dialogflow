@@ -15,7 +15,7 @@ app.use('/cotacoes', roteador)
 const DB_USER = process.env.DB_USER
 const DB_PASSWORD = process.env.DB_PASSWORD
 const url = process.env.MONGODB_URI
-const port = process.env.port || 3000
+const port = process.env.port
 
 
 mongoose.connect(url)
