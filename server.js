@@ -14,10 +14,11 @@ app.use('/cotacoes', roteador)
 
 const DB_USER = process.env.DB_USER
 const DB_PASSWORD = process.env.DB_PASSWORD
+const url = process.env.MONGODB_URI
 const port = process.env.port || 3000
 
 
-mongoose.connect(`mongodb+srv://${DB_USER}:${DB_PASSWORD}@exercicio1.c2pva.mongodb.net/usuariosConversor?retryWrites=true&w=majority`)
+mongoose.connect(url)
 .then(() => {
     console.log('Conexão ao banco de dados estabelecida!')
     app.listen(port, () => {console.log(`Servidor rodando na porta ${port}!!!`)})
