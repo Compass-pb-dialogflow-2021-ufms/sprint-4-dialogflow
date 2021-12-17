@@ -73,7 +73,18 @@ const defaultFallbackIntent = (req, res) => {
 }
 
 const ajudaIntent = (req, res) => {
+    const response = {
+        fulfillmentText: [
+            `${usuariosController.getNome()} para te ajudar vou te explicar minhas funcionalidades.\n\n`
+            + 'Cotação:\n'
+            + 'Aqui eu respondo a cotação atual de algumas moedas (Dólar Americano, Euro, Iene e Bitcoin) que por padrão será em Reais.\n'
+            + 'Mas também é possivel saber a cotação nessas outras moedas, basta pedir a conversão para a moeda que deseja.\n\n'
+            + 'Conversão:\n'
+            + 'Nessa função eu respondo o resultado do câmbio entre moedas (Real, Dólar Americano, Euro, Iene e Bitcoin).'
+        ]
+    }
 
+    res.send(response)
 }
 
 const cotacaoIntent = (req, res) => {
