@@ -26,7 +26,7 @@ Achei o projeto mais tranquilo que a avaliação da terceira sprint, creio que p
 - Acabei adicionando duas intenções para tentar deixar as responsabilidades bem distribuídas e também para captar com maior precisão o que o usuário deseja. Há outras intenções, mas elas não possuem grande expressão, pois são de confirmação e negação dentro do contexto
 
 
-# Como funciona o bot
+## Como funciona o bot
 
 Quando ele recebe uma mensagem, o Dialogflow atribui a uma intenção e faz um requisição POST para o backend, que está hospedado na heroku. O backend pega essa requisição, trata fazendo todo o processamento necessário e devolve um json para o DialogFlow, que por sua vez extrai a mensagem a ser enviada ao usuário e a envia.
 
@@ -42,10 +42,37 @@ O arquivo na raíz server.js conecta o banco de dados e incia o servidor, passan
 O bot está integrado com o telegram e com o line.
 
 
-##  Execução do programa Remotamente/Canais de comunicação
+## Execução do programa Remotamente/Canais de comunicação
 
 É possível utilizar o telegram a partir do link: http://t.me/conversorDeMoedas_Bot
 
 No line basta procurar o bot pelo id: @749omqvz e inicias a conversa.
 
 Caso queira consumir o weebhook, ele está diponível no link: https://exercicio-1-sprint-4.herokuapp.com/cotacoes
+
+
+## Execução localmente
+
+-Se faz necessário ter instalado o Node.js e o ngrok
+-> Passo a passo instalação Node.js: https://www.youtube.com/watch?v=Wras1X6rBrc
+-> Página para a instalação do ngrok: https://ngrok.com/download
+
+1. Abra o link: https://github.com/Compass-pb-dialogflow-2021-ufms/sprint-4-dialogflow/tree/horiel-costa-1
+
+2. Selecione o botão verde Code e faça o download do arquivo ZIP
+
+3. Extrai os dados do arquivo zipado (é recomendado fazer dentro de uma pasta para que seja mais fácil de encontrar)
+
+4. Abra o prompt de comando nessa pasta. O vídeo: https://www.youtube.com/watch?v=NZKpDpHL5Bo mostra como navegar entre pastas e usar o prompt de comando
+
+5. Na pasta, realize o comando "npm install" para obter todas as dependências
+
+6. Após a instalação das dependencias, digite "npm start"
+
+7. Abra um novo prompt de comando e navegue até a pasta onde se encontra o ngrok
+
+8. Digite no terminal ./ngrok http 3000
+
+9. Copie a url disponível na segunda palavra "Forwarding" até antes da seta("->")
+
+10. //por questão de tempo, a documentação encerrará aqui, a próxima vai estar um xuxu, confia.
