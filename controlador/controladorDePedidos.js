@@ -7,10 +7,12 @@ const botDePedidos = async (req, res) => {
   var source = req.body.originalDetectIntentRequest.source;
   if(source == 'telegram'){
     const idTelegramHere = req.body.originalDetectIntentRequest.payload.data.from.id
+    const nome = req.body.originalDetectIntentRequest.payload.data.from.first_name
     const usuario = new Usuario({idTelegram: idTelegramHere})
     const novoUsuario = await usuario.save()
     if(novoUsuario.idTelegram == idTelegramHere){
         resposta = true
+        var novoNome = nome;
     }    
   }
   
@@ -35,7 +37,7 @@ const botDePedidos = async (req, res) => {
             "Aqui você pode converter qualquer moeda para outra, ex:(30 reais em dolar)" + "\n" + 
             "Se precisar de ajuda é so digitar ajuda aqui!"});
         }else{
-            res.json({ "fulfillmentText": "Olá, seja bem vindo novamente ao Chatbot de Cotação Monetária!" + "\n" +
+            res.json({ "fulfillmentText": "Olá, " + novoNome + " seja bem vindo novamente ao Chatbot de Cotação Monetária!" + "\n" +
             "Aqui você pode converter qualquer moeda para outra, ex:(30 reais em dolar)" + "\n" + 
             "Se precisar de ajuda é so digitar ajuda aqui!"});
         }
