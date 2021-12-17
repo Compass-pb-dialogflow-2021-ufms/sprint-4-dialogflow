@@ -1,88 +1,51 @@
 
-# Avaliação Sprint 4 - Programa de Bolsas Compass.uol e UFMS
+# Exercício 1 da quarta sprint
 
-Segunda sprint do programa de bolsas Compass.uol para formação em chatbot Dialogflow.
-
-
-## Execução
-
-- Criar BOT em Dialogflow que atenda a necessidade de conversão de moedas;
+Um bot que consegue mostrar as cotações das moedas USD, JPY, BTC e EUR em real, além de conseguir fazer conversões de moedas no geral.
 
 
+## Diário de bordo
 
-## Entrega
+Achei o projeto mais tranquilo que a avaliação da terceira sprint, creio que pela experiência que ganhei nele. A maior dificuldade que tive foi a de gerar pelo menos as conversões das principais moedas para bitcoin, o que foi resolvido através de uma conversão em partes, onde sempre uso a cotação do real em bitcoin para gerar as outras cotações. Tentei seguir um padrão REST ao máximo possível. Decidi fazer um passo a passo para não me perder mais no deploy da heroku e, além disso, tentei deixar as respostas mais complexas dentro do backend e manter o fluxo de conversa intuitivo. Quero me aprofundar mais em eventos, pois nesse projeto acabei usando o hardcode.
 
-- Aceitar o convite do repositório da sprint-4-dialogflow;
 
-- Criar uma branch no repositório com o formato nome-sobrenome-numeroEntrega;
-
-- Subir o trabalho na branch com um readme.md, documentando detalhes sobre como a avaliação foi desenvolvida e como utilizar o sistema.
-
-- O prazo de entrega é até às 13h do dia 17/12 no repositório do github (https://github.com/Compass-pb-dialogflow-2021-ufms/sprint-4-dialogflow).
-
-# Especificação do Bot
-
-Desenvolver um chatbot que seja capaz de informar a cotação e fazer a conversão
-de valores para outras moedas.
-
- - Regras de negócio
-
-O chatbot tem que ser muito intuitivo, pois várias pessoas vão utilizar e testar seus
-serviços (inclusive pessoas leigas em programação).
-
-Conversão monetária: O bot tem que ser capaz de converter qualquer valor em Real (R$) para as outras moedas obrigatórias.
-
-Conversão de qualquer moeda obrigatória para qualquer moeda obrigatória.
-
-Cotação monetária: Para a cotação, o assistente tem que ser capaz de listar a cotação do Real (R$) em todas as moedas obrigatórias. Exemplo: O Real está cotado
-em $ 5,26. Observação: é importante mostrar a última atualização da cotação.
-
-As moedas obrigatórias são:
-- Real
-- Dólar Americano
-- Euro
-- Yen
-- Bitcoin
-
-O chatbot necessita estar integrado com uma API de cotação de moedas. Aqui vai uma sugestão de API de cotação gratuita: https://docs.awesomeapi.com.br/api-de-moedas
-
-Diferenciar a saudação para usuários que já conversaram anteriormente com o bot.
-
-Por exemplo: “Olá novamente fulano!”.
 
 ## Intenções
-Abaixo estão intenções que achamos necessárias incluir no chatbot, porém acreditamos que
-ainda faltam incluir algumas. 
 
-Na documentação é importante explicar se as intenções abaixo são suficientes e, se incluir novas intenções, explicar o motivo da inclusão.
+- Ajuda -> Uma intenção que busca elucidar melhor como o usuário pode utilizar o bot ao seu favor, com alguns exemplos para elucidar as funcionalidades
 
-Aqui estão as intenções obrigatórias:
-- Saudação (intenção de boas-vindas)
-- Ajuda (por exemplo, mostrar um menu quando o usuário pedir ajuda)
-- Quando o assistente não entender alguma coisa
+- Converter um valor -> Essa intenção vem para fazer as conversões em diferentes moedas, utilizando-se de APIs externas. Utiliza de entidades padrões do sistema para conseguir os parâmetros necessários e, caso não sejam fornecidos, o prompt é acionado para garantir o preenchimento.
 
-## Canais de comunicação
-O chatbot deve ter pelo menos 1 canal de comunicação:
-- Telegram;
-- Case não consiga Telegram, integrar no canal Line. Caso não possível, utilizar Dialogflow Messenger;
+- Fallback Intent -> Por ser um bot com poucas funcionalidades, optei por deixar um fallback único, que informa quando não compreendeu algo e sugere o menu de ajuda para o usuário
 
-## Bônus
+- Saudação -> Cumprimenta o usuário e diferencia um pouco a mensagem, caso já tenha falado com o bot antes. Caso a req tenha sido feita pelo Telegram, fala até o primeiro nome do usuário. Essa intenção por baixo dos planos também descobre se o usuário está cadastrado e caso não esteja, ela o inclui no BD
 
-A tarefa bônus não é obrigatória, mas será muito bem vista se for concluída.
-- Bônus: Integrar nos canais Telegram, Line e Dialogflow Messenger;
-
-## Documentação
-A documentação é um item muito importante em um projeto, portanto, TUDO deve ser documentado. 
-
-Padrão de projeto, arquitetura, intenções, testes, problemas encontrados e suas soluções, etc... 
-
-Descrever detalhadamente cada item.
-
-Seja criativo!
-
-Você tem total liberdade para fazer o projeto da forma que achar melhor. Além disso, fique
-à vontade para implementar novas funcionalidades para agregar valor ao sistema.
+- Ver principais cotações -> consome duas APIs para mostrar as cotações exigidas no documento   .pdf.
 
 
-## Entrega
-13:00 - 17/12/2021
+- Acabei adicionando duas intenções para tentar deixar as responsabilidades bem distribuídas e também para captar com maior precisão o que o usuário deseja. Há outras intenções, mas elas não possuem grande expressão, pois são de confirmação e negação dentro do contexto
+
+
+# Como funciona o bot
+
+Quando ele recebe uma mensagem, o Dialogflow atribui a uma intenção e faz um requisição POST para o backend, que está hospedado na heroku. O backend pega essa requisição, trata fazendo todo o processamento necessário e devolve um json para o DialogFlow, que por sua vez extrai a mensagem a ser enviada ao usuário e a envia.
+
+
+## Pastas e arquivos
+
+O arquivo na raíz server.js conecta o banco de dados e incia o servidor, passando a requisição na rota /cotacoes para o roteador, que por sua vez extrai a intent e aciona a função necessária para a resposta. Cada função que trata as intenções estão na pasta dialogflow/intencoes. Dentro da pasta dialogflow também temos a pasta modelsResponse, que possui o arquivo respostaMensagem.js, que a partir de uma string, formata ela para poder enviar para o Dialogflow. A pasta dataBase localizada na raíz possui as funções de achar um usuário e de adicionálo ao BD, além de dois modelos, um para o telegram e outro para o line.
+
+
+
+## Integrações
+
+O bot está integrado com o telegram e com o line.
+
+
+##  Execução do programa Remotamente/Canais de comunicação
+
+É possível utilizar o telegram a partir do link: http://t.me/conversorDeMoedas_Bot
+
+No line basta procurar o bot pelo id: @749omqvz e inicias a conversa.
+
+Caso queira consumir o weebhook, ele está diponível no link: https://exercicio-1-sprint-4.herokuapp.com/cotacoes
