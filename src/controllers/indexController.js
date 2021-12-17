@@ -1,4 +1,5 @@
 const usuariosController = require('./usuariosController')
+const API = require('../API/connection')
 
 const catchText = {
     fulfillmentText: [
@@ -87,7 +88,56 @@ const ajudaIntent = (req, res) => {
     res.send(response)
 }
 
-const cotacaoIntent = (req, res) => {
+const cotacaoIntent = async (req, res) => {
+    try {
+        let response
+        const apiResponse = await API.get('last/USD-BRL,EUR-BRL,JPY-BRL,BTC-BRL')
+
+        const moeda = req.body.queryResult.parameters.moeda
+        if (moeda !== '') {
+            switch (moeda) {
+                case 'Dólar Americano':
+                    response = {
+                        fulfillmentText: [
+                            `${usuariosController.getNome()} a cotação do ${moeda} está em R$ ${(apiResponse.data.USDBRL.bid*1).toFixed(2)}.`
+                        ]
+                    }
+                    break
+                case 'Euro':
+                    response = {
+                        fulfillmentText: [
+                            `${usuariosController.getNome()} a cotação do ${moeda} está em R$ ${(apiResponse.data.EURBRL.bid*1).toFixed(2)}.`
+                        ]
+                    }
+                    break
+                case 'Yen':
+                    response = {
+                        fulfillmentText: [
+                            `${usuariosController.getNome()} a cotação do ${moeda} está em R$ ${(apiResponse.data.JPYBRL.bid*1).toFixed(2)}.`
+                        ]
+                    }
+                    break
+                case 'Bitcoin':
+                    response = {
+                        fulfillmentText: [
+                            `${usuariosController.getNome()} a cotação do ${moeda} está em R$ ${apiResponse.data.BTCBRL.bid} mil.`
+                        ]
+                    }
+                    break
+            }
+        } else {
+            response = {
+                fulfillmentText: [
+                    `${usuariosController.getNome()} na sua última mensagem não consegui entender para qual moeda deseja saber a cotação.\n`
+                    + 'Poderia repetir por favor ?'
+                ]
+            }
+        }
+
+        res.send(response)
+    } catch {
+        res.send(catchText)
+    }
 
 }
 
