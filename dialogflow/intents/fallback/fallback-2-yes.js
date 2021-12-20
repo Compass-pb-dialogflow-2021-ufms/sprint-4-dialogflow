@@ -1,6 +1,6 @@
 function secondFallbackYes()
 {
-    const text = 'menuAjuda'
+    const text = 'helpMenu'
 
 
     return text
