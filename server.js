@@ -1,5 +1,5 @@
 const express = require('express')
-const router = require('./rotas/router')
+const router = require('./routs/router')
 
 
 const app = express()

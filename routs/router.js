@@ -1,3 +1,4 @@
+const router = require('express').Router()
 const formatedMessage = require('../dialogflow/modelsResponse/mensagem')
 const eventTrigger = require('../dialogflow/modelsResponse/eventTrigger')
 const welcome = require('../dialogflow/intents/welcome');
@@ -6,7 +7,7 @@ const fallback = require('../dialogflow/intents/fallback/fallback')
 const helpMenu = require('../dialogflow/intents/helpMenu')
 const secondFallback = require('../dialogflow/intents/fallback/fallback-2')
 const secondFallbackYes = require('../dialogflow/intents/fallback/fallback-2-yes')
-const router = require('express').Router()
+const aboutMe = require('../dialogflow/intents/aboutMe')
 
 
 router.post('', (req, res) =>
@@ -19,7 +20,7 @@ router.post('', (req, res) =>
             break
         case 'Search flight':
             searchFlight()
-            res.send(formatedMessage('oi'))
+            res.send(formatedMessage('oi')) //arrumar texto e função
         case 'Fallback':
             res.send(formatedMessage(fallback())) 
             break
@@ -31,6 +32,9 @@ router.post('', (req, res) =>
             break
         case 'Help':
             res.send(formatedMessage(helpMenu())) //arrumar texto
+            break
+        case 'Know about me':
+            res.send(formatedMessage(aboutMe())) //arrumar texto
             break
         default:
             break;
