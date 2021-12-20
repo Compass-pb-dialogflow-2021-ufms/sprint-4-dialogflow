@@ -1,6 +1,5 @@
-const { urlencoded } = require('express')
 const express = require('express')
-const roteador = require('./rotas/roteador')
+const router = require('./rotas/router')
 
 
 const app = express()
@@ -8,7 +7,7 @@ app.use(express.urlencoded({extended: true}))
 app.use(express.json())
 
 
-app.use('/compassoVoos', roteador)
+app.use('/compassoVoos', router)
 
 
 const port = process.env.PORT || 3000

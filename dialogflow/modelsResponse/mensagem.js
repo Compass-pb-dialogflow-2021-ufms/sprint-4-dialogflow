@@ -1,4 +1,4 @@
-const formato = JSON.parse(JSON.stringify({
+const format = JSON.parse(JSON.stringify({
         "fulfillmentMessages": [
           {
             "text": {
@@ -14,12 +14,12 @@ const formato = JSON.parse(JSON.stringify({
     
     
     
-    function mensagemFormatada(text)
+    function formatedMessage(text)
     {
-        formato.fulfillmentMessages[0].text.text.splice(0, 1, text)
-        const mensagem = JSON.stringify(formato)
-        return mensagem
+        format.fulfillmentMessages[0].text.text.splice(0, 1, text)
+        const message = JSON.stringify(format)
+        return message
     }
     
     
-    module.exports = mensagemFormatada
+    module.exports = formatedMessage

@@ -1,4 +1,4 @@
-function menuAjuda()
+function helpMenu()
 {
     const text = 'Intent de ajuda'
 
@@ -7,4 +7,4 @@ function menuAjuda()
 }
 
 
-module.exports = menuAjuda
+module.exports = helpMenu
