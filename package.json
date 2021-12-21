@@ -1,0 +1,30 @@
+{
+  "name": "sprint-4-dialogflow",
+  "version": "1.0.0",
+  "description": "Entrega 2 da sprint 4 do sistema de bolsas da Compass.uol",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "start": "node src/App.js",
+    "dev": "nodemon src/App.js",
+    "type": "git",
+    "url": "git+https://github.com/Compass-pb-dialogflow-2021-ufms/sprint-4-dialogflow.git"
+  },
+  "author": "Tiago Seiti Fugishima",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Compass-pb-dialogflow-2021-ufms/sprint-4-dialogflow/issues"
+  },
+  "homepage": "https://github.com/Compass-pb-dialogflow-2021-ufms/sprint-4-dialogflow#readme",
+  "dependencies": {
+    "axios": "^0.24.0",
+    "body-parser": "^1.19.1",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}
