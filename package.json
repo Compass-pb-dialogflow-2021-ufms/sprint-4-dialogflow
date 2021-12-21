@@ -4,11 +4,11 @@
   "description": "Entrega 2 da sprint 4 do sistema de bolsas da Compass.uol",
   "main": "index.js",
   "scripts": {
+    "start": "node src/App.js",
+    "dev": "nodemon src/App.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
-    "start": "node src/App.js",
-    "dev": "nodemon src/App.js",
     "type": "git",
     "url": "git+https://github.com/Compass-pb-dialogflow-2021-ufms/sprint-4-dialogflow.git"
   },
