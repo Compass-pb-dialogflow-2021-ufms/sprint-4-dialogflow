@@ -1,88 +1,23 @@
+# Atividade 2 Sprint 4 - Programa de Bolsas Compass.uol e UFMS
 
-# Avaliação Sprint 4 - Programa de Bolsas Compass.uol e UFMS
-
-Segunda sprint do programa de bolsas Compass.uol para formação em chatbot Dialogflow.
-
-
-## Execução
-
-- Criar BOT em Dialogflow que atenda a necessidade de conversão de moedas;
-
-
+## Diário de bordo
+//TODO
 
 ## Entrega
+Para iniciar a aplicação, deve-se possuir o Node.JS na maquina.
 
-- Aceitar o convite do repositório da sprint-4-dialogflow;
+1- Na pasta do projeto, abra o terminal e digite npm install para instalar todas as dependencias.
 
-- Criar uma branch no repositório com o formato nome-sobrenome-numeroEntrega;
+2- Após instalar, digite npm start para iniciar a aplicação.
 
-- Subir o trabalho na branch com um readme.md, documentando detalhes sobre como a avaliação foi desenvolvida e como utilizar o sistema.
+3- Caso possua o ngrok(https://ngrok.com/download), abra e digite ngrok http 3000, e logo após apareça o link https de onde está hospedado a aplicação.
 
-- O prazo de entrega é até às 13h do dia 17/12 no repositório do github (https://github.com/Compass-pb-dialogflow-2021-ufms/sprint-4-dialogflow).
+4- Logo após extraia o zip e importe o bot para o dialogflow na aba de configurações e Export and Import.
 
-# Especificação do Bot
+5- O bot já deve estar online, copiei e cole o link https feito no ngrok na aba Fulfillment no dialogflow.
 
-Desenvolver um chatbot que seja capaz de informar a cotação e fazer a conversão
-de valores para outras moedas.
+6- Pronto, o bot já deve estar pronto para uso!
 
- - Regras de negócio
-
-O chatbot tem que ser muito intuitivo, pois várias pessoas vão utilizar e testar seus
-serviços (inclusive pessoas leigas em programação).
-
-Conversão monetária: O bot tem que ser capaz de converter qualquer valor em Real (R$) para as outras moedas obrigatórias.
-
-Conversão de qualquer moeda obrigatória para qualquer moeda obrigatória.
-
-Cotação monetária: Para a cotação, o assistente tem que ser capaz de listar a cotação do Real (R$) em todas as moedas obrigatórias. Exemplo: O Real está cotado
-em $ 5,26. Observação: é importante mostrar a última atualização da cotação.
-
-As moedas obrigatórias são:
-- Real
-- Dólar Americano
-- Euro
-- Yen
-- Bitcoin
-
-O chatbot necessita estar integrado com uma API de cotação de moedas. Aqui vai uma sugestão de API de cotação gratuita: https://docs.awesomeapi.com.br/api-de-moedas
-
-Diferenciar a saudação para usuários que já conversaram anteriormente com o bot.
-
-Por exemplo: “Olá novamente fulano!”.
-
-## Intenções
-Abaixo estão intenções que achamos necessárias incluir no chatbot, porém acreditamos que
-ainda faltam incluir algumas. 
-
-Na documentação é importante explicar se as intenções abaixo são suficientes e, se incluir novas intenções, explicar o motivo da inclusão.
-
-Aqui estão as intenções obrigatórias:
-- Saudação (intenção de boas-vindas)
-- Ajuda (por exemplo, mostrar um menu quando o usuário pedir ajuda)
-- Quando o assistente não entender alguma coisa
-
-## Canais de comunicação
-O chatbot deve ter pelo menos 1 canal de comunicação:
-- Telegram;
-- Case não consiga Telegram, integrar no canal Line. Caso não possível, utilizar Dialogflow Messenger;
-
-## Bônus
-
-A tarefa bônus não é obrigatória, mas será muito bem vista se for concluída.
-- Bônus: Integrar nos canais Telegram, Line e Dialogflow Messenger;
-
-## Documentação
-A documentação é um item muito importante em um projeto, portanto, TUDO deve ser documentado. 
-
-Padrão de projeto, arquitetura, intenções, testes, problemas encontrados e suas soluções, etc... 
-
-Descrever detalhadamente cada item.
-
-Seja criativo!
-
-Você tem total liberdade para fazer o projeto da forma que achar melhor. Além disso, fique
-à vontade para implementar novas funcionalidades para agregar valor ao sistema.
-
-
-## Entrega
-13:00 - 17/12/2021
+## Rota e Link do Bot
+<li>Link do bot no telegram: t.me/aerobotquenaovoa_bot
+<li>Link da api no glitch: https://compassoaerobot.glitch.me/aerobot
