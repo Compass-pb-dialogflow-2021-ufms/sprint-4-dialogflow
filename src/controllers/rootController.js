@@ -18,15 +18,67 @@ const switchIntent = (req, res, intent) => {
     }
 }
 
-const defaultWelcomeIntent = (req, res) => {}
+const defaultWelcomeIntent = (req, res) => {
+    const response = {
+        fulfillmentText: [
+              'Olá sou seu agente pessoal de viagens. '
+            + 'Caso deseje conhecer ou rever minhas funções é so pedir por ajuda.\n\n'
+            + 'Como posso te ajudar hoje ?'
+        ]
+    }
 
-const defaultFallbackIntent = (req, res) => {}
+    res.send(response)
+}
 
-const helpIntent = (req, res) => {}
+const defaultFallbackIntent = (req, res) => {
+    const response = {
+        fulfillmentText: [
+              'Desculpe mas parece que eu não trato desse assunto.\n\n'
+            + 'Se estiver com dificuldades é so pedir por ajudanque mostrarei minhas funções.'
+        ]
+    }
 
-const aboutMeIntent = (req, res) => {}
+    res.send(response)
+}
 
-const farewellIntent = (req, res) => {}
+const helpIntent = (req, res) => {
+    const response = {
+        fulfillmentText: [
+              'Menu:\n\n'
+            + '    Buscar por passagens aéreas.\n'
+            + '    Fazer reserva.\n'
+            + '    Fazer check-in.\n'
+            + '    Verificar status do voo.\n\n'
+            + 'No que mais posso lhe ajudar ?'
+        ]
+    }
+
+    res.send(response)
+}
+
+const aboutMeIntent = (req, res) => {
+    const response = {
+        fulfillmentText: [
+              'Eu sou seu agente pessoal de viagens e estou aqui para te auxiliar em cada etapa até sua poltrona no avião.\n'
+            + 'E para isso tenho várias funções para te atender. '
+            + 'Que tal começarmos pela busca de passagens aéreas ?\n\n'
+            + 'Caso precise, pode me pedir por ajudar que irei listar todas minhas funções.'
+        ]
+    }
+
+    res.send(response)
+}
+
+const farewellIntent = (req, res) => {
+    const response = {
+        fulfillmentText: [
+              'Caso precise de mim estarei sempre aqui para te dar suporte com suas passagens aéreas.\n\n'
+            + 'Espero ter te ajudado desta vez e até logo.'
+        ]
+    }
+
+    res.send(response)
+}
 
 const main = (req, res) => {
     const intent = req.body.queryResult.intent.displayName
