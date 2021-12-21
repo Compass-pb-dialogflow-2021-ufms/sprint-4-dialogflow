@@ -8,6 +8,7 @@ const helpMenu = require('../dialogflow/intents/helpMenu')
 const secondFallback = require('../dialogflow/intents/fallback/fallback-2')
 const secondFallbackYes = require('../dialogflow/intents/fallback/fallback-2-yes')
 const aboutMe = require('../dialogflow/intents/aboutMe')
+const goodbye = require('../dialogflow/intents/goodbye')
 
 
 router.post('', (req, res) =>
@@ -34,7 +35,10 @@ router.post('', (req, res) =>
             res.send(formatedMessage(helpMenu())) //arrumar texto
             break
         case 'Know about me':
-            res.send(formatedMessage(aboutMe())) //arrumar texto
+            res.send(formatedMessage(aboutMe())) 
+            break
+        case 'Goodbye':
+            res.send(formatedMessage(goodbye())) 
             break
         default:
             break;
