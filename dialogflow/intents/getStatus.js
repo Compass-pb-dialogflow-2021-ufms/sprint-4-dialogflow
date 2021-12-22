@@ -7,11 +7,11 @@ async function getStatus(parameters)
 {
     const url = 'https://aerobotapi2.herokuapp.com/status'
     const cpf = parameters.cpf
-    const flightNumber = parameters.flightNumber
+    const flightCode = parameters.flightCode
     const formattedCpf = formattingCpf(cpf)
     
     
-    const response = await axios.post(url, statusRequest(flightNumber, formattedCpf))
+    const response = await axios.post(url, statusRequest(flightCode, formattedCpf))
     return response.data.chatbot_response + '\nPosso te ajudar com mais alguma coisa?'
 }
 
