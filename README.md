@@ -56,7 +56,7 @@ O bot está integrado com o telegram.
 
 É possível utilizar o telegram a partir do link: https://t.me/Athenas_Air_lines_bot
 
-Caso queira consumir o weebhook, ele está diponível no link: https://exercicio-1-sprint-4.herokuapp.com/cotacoes
+Caso queira consumir o weebhook, ele está diponível no link: https://exercicio-2-sprint-4.herokuapp.com/compassoVoos
 
 
 ## Execução localmente
@@ -105,7 +105,7 @@ Caso queira consumir o weebhook, ele está diponível no link: https://exercicio
 
 20. Aguarde o carregamento e aperte em "Fulfilment", opção do menu do lado esquerdo da tela
 
-21. Em "Webhook" substitua a url "https://0a17-2804-7f3-4b89-4ef3-dc29-6169-5bc8-58f0.ngrok.io/compassoVoos" pela obtida no passo 14 e adicione no final dela "/compassoVoos"
+21. Em "Webhook" substitua a url "https://exercicio-2-sprint-4.herokuapp.com/compassoVoos" pela obtida no passo 14 e adicione no final dela "/compassoVoos"
 
 22. Abaixe a tela e clique no botão "Save".
 
