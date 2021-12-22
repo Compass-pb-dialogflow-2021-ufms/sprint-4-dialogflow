@@ -1,88 +1,46 @@
+## Diário de bordo.
 
-# Avaliação Sprint 4 - Programa de Bolsas Compass.uol e UFMS
+Em primeiro momento o foco foi criar os diretórios de maneira que coerente e subir uma aplicação. Junto a isso, integrar a aplicação a plataforma do Dialogflow e por sua vez integra-la ao Line, o que foi feito sem grandes dificuldades.
 
-Segunda sprint do programa de bolsas Compass.uol para formação em chatbot Dialogflow.
+Após isso estabeleci a comunicação com a API de consulta, utilizando o Axios para gerênciar as chamadas para essa API.
 
+Contudo nesse momento surgiu o primeiro problema, para a rota /search sempre é retornada um erro 500, o que impossibilitou o desenvolvimento real para a função de busca de passagens. Para contornar isso foi implementado uma solução que emula o funcionamento correto da API, retornando dados validos ao usuários.
 
-## Execução
+Por fim implementei os outros fluxos de dialogos.
 
-- Criar BOT em Dialogflow que atenda a necessidade de conversão de moedas;
+A principal dificuldade que enfrentei foi que para essa entrega eu tentei um approach diferente de desenvolvimento, o que deixou o código mais verboso, longo, o que também consumiu tempo tanto para realização quanto curva de aprendizado. Por conta disso sinto que mtas coisas ficaram defasadas, principalmente se tratando do bot no console. O fato de os dados advindos da funcionalidade buscar passagens serem emulados também foi um problema para mim, já que tive uma trava, demorando a achar um meio de manipular esses dados dentro do código.
 
+## Tecnologias
 
+- Express -> Responsável por gerenciar as requisições da aplicação.
+- Axios -> Responsável pela comunicação entre a API de consulta.
+- Nodemon -> Ferramentaa utilizada para apoiar no desenvolvimento
+- Dotenv -> Responsável por gerenciar as variáveis de ambiente.
 
-## Entrega
+## Aplicação
 
-- Aceitar o convite do repositório da sprint-4-dialogflow;
+Para realizar qualquer mudança de desenvolvimento será necessario ter <a href="https://nodejs.org/pt-br/">Node</a>.
+Então basta clonar o repositório e rodar o comando "npm install".
 
-- Criar uma branch no repositório com o formato nome-sobrenome-numeroEntrega;
+- Pacotes
+    - API -> comunicação com a API de consulta.
+    - routes -> rotas da aplicação.
+    - controllers -> controladores de entidades.
 
-- Subir o trabalho na branch com um readme.md, documentando detalhes sobre como a avaliação foi desenvolvida e como utilizar o sistema.
+## Bot
 
-- O prazo de entrega é até às 13h do dia 17/12 no repositório do github (https://github.com/Compass-pb-dialogflow-2021-ufms/sprint-4-dialogflow).
+- Intents:
 
-# Especificação do Bot
+    - Default Welcome Intent -> Mensagem de boas vindas, também responsável por resconhecer o usuário. Caso for o primeiro contato do usuário com o bot, será feito um pequeno cadastro.
+    - Default Fallback Intent -> Caso o bot não entenda o que foi falado, seja por erro de digitação ou péla mensagem estar fora de escopo, será retornado uma mensagem que sugestionará o usuário a entrar em na Ajuda Intent.
+    - Help Intent -> O bot retorna uma mensagem explicando suas funcionalidades ao usuário.
+    - About me Intent -> O bot retorna uma explicação sobre quem é e sua função.
+    - Farewell Intent -> O bot manda uma mensagem de despedida e finaliza a conversa.
+    - Fluxo para pesquisar passagens (Start Seacrh Intent, Where From Intent, Where To Intent, Departure Date Intent, Return Date Intent) -> O bot retorna uma lista com todas as passagens que se enquadra na descrição dada pelo usuário.
+    - Fluxo para reservar passagens (Pre Reservation Intent, Passanger Data Intent, Seats Intents) -> Após ser informado dados pessoais e o usuário escolher a poltronas do voo, o bot faz a reserva e retorna o código do voo para o usuário.
+    - Fluxo para realizar checkin (Pre Checkin Intent, Checkin Intent) -> Após informado os dados do usuário e do voo, o bot realiza o checkin e retorna o código de chekin para o usuário.
+    - Fluxo para visualizar o status da passagem (Pre Status Intent, Status Intent) -> Após informar os dados do voo e do usuário, o bot retorna as informações da passagem (ida e volta) para o usuário.
+    
 
-Desenvolver um chatbot que seja capaz de informar a cotação e fazer a conversão
-de valores para outras moedas.
-
- - Regras de negócio
-
-O chatbot tem que ser muito intuitivo, pois várias pessoas vão utilizar e testar seus
-serviços (inclusive pessoas leigas em programação).
-
-Conversão monetária: O bot tem que ser capaz de converter qualquer valor em Real (R$) para as outras moedas obrigatórias.
-
-Conversão de qualquer moeda obrigatória para qualquer moeda obrigatória.
-
-Cotação monetária: Para a cotação, o assistente tem que ser capaz de listar a cotação do Real (R$) em todas as moedas obrigatórias. Exemplo: O Real está cotado
-em $ 5,26. Observação: é importante mostrar a última atualização da cotação.
-
-As moedas obrigatórias são:
-- Real
-- Dólar Americano
-- Euro
-- Yen
-- Bitcoin
-
-O chatbot necessita estar integrado com uma API de cotação de moedas. Aqui vai uma sugestão de API de cotação gratuita: https://docs.awesomeapi.com.br/api-de-moedas
-
-Diferenciar a saudação para usuários que já conversaram anteriormente com o bot.
-
-Por exemplo: “Olá novamente fulano!”.
-
-## Intenções
-Abaixo estão intenções que achamos necessárias incluir no chatbot, porém acreditamos que
-ainda faltam incluir algumas. 
-
-Na documentação é importante explicar se as intenções abaixo são suficientes e, se incluir novas intenções, explicar o motivo da inclusão.
-
-Aqui estão as intenções obrigatórias:
-- Saudação (intenção de boas-vindas)
-- Ajuda (por exemplo, mostrar um menu quando o usuário pedir ajuda)
-- Quando o assistente não entender alguma coisa
-
-## Canais de comunicação
-O chatbot deve ter pelo menos 1 canal de comunicação:
-- Telegram;
-- Case não consiga Telegram, integrar no canal Line. Caso não possível, utilizar Dialogflow Messenger;
-
-## Bônus
-
-A tarefa bônus não é obrigatória, mas será muito bem vista se for concluída.
-- Bônus: Integrar nos canais Telegram, Line e Dialogflow Messenger;
-
-## Documentação
-A documentação é um item muito importante em um projeto, portanto, TUDO deve ser documentado. 
-
-Padrão de projeto, arquitetura, intenções, testes, problemas encontrados e suas soluções, etc... 
-
-Descrever detalhadamente cada item.
-
-Seja criativo!
-
-Você tem total liberdade para fazer o projeto da forma que achar melhor. Além disso, fique
-à vontade para implementar novas funcionalidades para agregar valor ao sistema.
-
-
-## Entrega
-13:00 - 17/12/2021
+- Integração
+    - O bot está disponivel pelo line, para acessa-lo será preciso ter uma conta no <a href="https://line.me/en/">LINE</a>. Após a criação de conta você deverá ir em Adicionar amigos -> Perquisar, e procurar pelo código @431tncon.
