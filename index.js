@@ -3,8 +3,6 @@ const app = express();
 const cors = require('cors');
 const routerInternaApi = require('./Rotas/rotaInternaApi');
 const routerExternaApi = require('./Rotas/rotaExternaApi');
-//const routerBD = require('./Rotas/rotaBD');
-//const conexao = require('./BancoDeDados/conexao');
 const port = process.env.PORT || 3000;
 
 app.use(cors());

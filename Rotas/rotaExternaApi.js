@@ -3,7 +3,6 @@ const axios = require('axios');
 
 
 router.post('/search', async (req,res)=>{
-   console.log(req.body);
     try {
         const {data} = await axios(`https://compasso-flight.herokuapp.com/api/v1/search`,req.body);
         return res.json(data);
@@ -34,8 +33,6 @@ router.post('/checkin', async (req,res)=>{
     }
 });
 router.post('/status', async (req,res)=>{
-    console.log("req.body");
-    console.log(JSON.stringify(req.body));
     try {
         const {data} = await axios.post(`https://compasso-flight.herokuapp.com/api/v1/status`,req.body);
         return res.send(

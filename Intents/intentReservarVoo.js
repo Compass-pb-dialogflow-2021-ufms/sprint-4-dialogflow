@@ -59,7 +59,6 @@ module.exports = {
         this.dadosPassageiro = {};
         const assentosIda = this.listarAssentosIdaEscolhidos();
         const assentosVolta = this.listarAssentosVoltaEscolhidos();
-        console.log(dadosTodos.passengers.length + " e "+ dadosBuscaVoo.dadosVooEscolhido.howManyPeople)
         if(dadosTodos.passengers.length === dadosBuscaVoo.dadosVooEscolhido.howManyPeople){
             const codigoVoo = await this.fazerReserva();
         return `Código de Voo: ${codigoVoo},
@@ -119,8 +118,6 @@ module.exports = {
         delete dadosBody.freeSeatsGoing;
         delete dadosBody.freeSeatsReturn;
         dadosBody.passengers = this.dadosTodos.passengers;
-        console.log("dadosBody");
-        console.log(dadosBody);
         try {
             const resposta = await fetch(`https://101d-2804-3b1c-110-f601-b942-71b5-6862-4391.ngrok.io/api/externa/reservation/`, {
                 method: "post",

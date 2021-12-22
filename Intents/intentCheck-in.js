@@ -15,7 +15,6 @@ module.exports = {
     async cpfCheck(parametros) {
         this.dadosCheck.cpf = parametros.cpf;
         const mensagemCheck = await this.checkIn();
-        console.log(mensagemCheck.checkinCode);
         return `Seu código de check-in: ${mensagemCheck.checkinCode}\n Para olhar o status de Seu Voo digite "Status"`;
     },
     async checkIn() {

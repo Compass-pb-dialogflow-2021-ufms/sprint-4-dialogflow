@@ -40,8 +40,6 @@ module.exports = {
         }
     },
     async statusVoo() {
-        console.log("dados status")
-        console.log(JSON.stringify(this.dadosStatus));
         try {
             const resposta = await fetch(`https://8905-45-6-110-101.ngrok.io/api/externa/status/`, {
                 method: "post",
