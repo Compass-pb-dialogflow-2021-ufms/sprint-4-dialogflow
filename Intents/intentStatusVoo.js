@@ -41,7 +41,7 @@ module.exports = {
     },
     async statusVoo() {
         try {
-            const resposta = await fetch(`https://8905-45-6-110-101.ngrok.io/api/externa/status/`, {
+            const resposta = await fetch(`https://projeto-sprint-four-two.herokuapp.com/api/externa/status/`, {
                 method: "post",
                 body: JSON.stringify(this.dadosStatus),
                 headers: {

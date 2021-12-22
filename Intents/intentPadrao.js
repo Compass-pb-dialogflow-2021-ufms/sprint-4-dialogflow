@@ -1,4 +1,4 @@
-let dadosBuscaVoo = {};
+
 module.exports = {
   fallback() {
     return `Não entendi! Fique atendo aos detalhes do que você precisa  informar e diga novamente!`;

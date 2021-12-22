@@ -1,28 +1,9 @@
-const fetch = require('cross-fetch');
+
 let dadosBuscarVoo = {};
 let dadosVooEscolhido = {};
 module.exports = {
     dadosBuscarVoo,
-    dadosVooEscolhido : {
-        price: 1252.23,
-        company: "Azul",
-        whereFrom: "POA",
-        cityFrom: "Porto Alegre",
-        whereTo: "FOR",
-        cityTo: "Fortaleza",
-        roundTrip: true,
-        howManyPeople: 2,
-        departureDate: "2021-12-23",
-        departureHour: "12:35",
-        returnDate: "2021-12-27",
-        returnHour: "18:35",
-        freeSeatsGoing: [
-          "1A"
-        ],
-        freeSeatsReturn: [
-          "1A"
-        ]
-      },
+    dadosVooEscolhido,
     inicioBuscarVoo() {
         return `Informe local de origem
         \nEXEMPLO: Porto Alegre`;
@@ -73,7 +54,7 @@ module.exports = {
     },
     buscarVoo2() {
         
-        /*
+        
         if (dadosBuscarVoo.roundTrip) {
             this.dadosVooEscolhido = {
                 price: 1252.23,
@@ -117,7 +98,7 @@ module.exports = {
         }
 
         return `Digite "Reserva" caso queira reservar a passagem
-                \nDigite menu caso queira acessar outros servicos`;*/
+                \nDigite menu caso queira acessar outros servicos`;
     },
     voosAchados() {
         this.buscarVoo2();

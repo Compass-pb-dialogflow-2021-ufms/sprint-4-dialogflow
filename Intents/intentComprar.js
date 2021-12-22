@@ -1,11 +1,11 @@
-const fetch = require('cross-fetch');
+const dadosBuscaVoo = require('./intentBuscarVoo');
 let dadosCartao;
 module.exports ={
     inicioCompraPassagem(){
-        return `Qual a forma de pagamento "Boleto" ou "Cartão"?`
+        return `Valor Total: $${dadosBuscaVoo.dadosVooEscolhido.Price}\nQual a forma de pagamento "Boleto" ou "Cartão"?`
     },
     boleto(){
-        //mostrar valor
+        
         return `Deseja Finalizar compra ?\nSe sim digite "Sim"\nSe não digite "Não"`;
     },
     simFinalizar(){

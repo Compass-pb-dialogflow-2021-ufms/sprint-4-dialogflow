@@ -119,7 +119,7 @@ module.exports = {
         delete dadosBody.freeSeatsReturn;
         dadosBody.passengers = this.dadosTodos.passengers;
         try {
-            const resposta = await fetch(`https://101d-2804-3b1c-110-f601-b942-71b5-6862-4391.ngrok.io/api/externa/reservation/`, {
+            const resposta = await fetch(`https://projeto-sprint-four-two.herokuapp.com/api/externa/reservation/`, {
                 method: "post",
                 headers: {
                     'Content-Type': 'application/json'
