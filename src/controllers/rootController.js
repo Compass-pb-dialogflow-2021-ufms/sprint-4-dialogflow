@@ -32,6 +32,15 @@ const switchIntent = (req, res, intent) => {
         case 'Return Date Intent':
             returnDateIntent(req, res)
             break
+        case 'Pre Reservation Intent':
+            preReservationIntent(req, res)
+            break
+        case 'Passenger Data Intent':
+            passengerDataIntent(req, res)
+            break
+        case 'Seats Intent':
+            seatsIntent(req, res)
+            break
     }
 }
 
@@ -135,7 +144,7 @@ const whereToIntent = (req, res) => {
 const departureDateIntent = (req, res) => {
     const response = {
         fulfillmentText: [
-            'E para finalizar qual a data para a volta ?'
+            'E para finalizar, qual a data para a volta ?'
         ]
     }
 
@@ -143,11 +152,10 @@ const departureDateIntent = (req, res) => {
 }
 
 const returnDateIntent = (req, res) => {
-    console.log(req.body.queryResult.outputContexts)
-    const whereFrom     = req.body.queryResult.outputContexts[0].parameters.whereFrom
-        , whereTo       = req.body.queryResult.outputContexts[0].parameters.whereTo
-        , departureDate = (req.body.queryResult.outputContexts[0].parameters.departureDate).split('T')[0]
-        , returnDate    = (req.body.queryResult.outputContexts[0].parameters.returnDate).split('T')[0]
+    const whereFrom     = req.body.queryResult.outputContexts[1].parameters.whereFrom
+        , whereTo       = req.body.queryResult.outputContexts[1].parameters.whereTo
+        , departureDate = (req.body.queryResult.outputContexts[1].parameters.departureDate).split('T')[0]
+        , returnDate    = (req.body.queryResult.outputContexts[1].parameters.returnDate).split('T')[0]
 
     const response = {
         fulfillmentText: [
@@ -178,7 +186,7 @@ const returnDateIntent = (req, res) => {
             + '    Hora de embarque: 12:35\n'
             + '    Poltronas: 4A\n'
             + 'Preço: R$ 1322,18\n\n'
-            + '[OPÇÂO 3]'
+            + '[OPÇÂO 3]\n'
             + 'Companhia: LATAM\n'
             + 'Ida:\n'
             + `    Local: ${whereFrom}\n`
@@ -196,6 +204,133 @@ const returnDateIntent = (req, res) => {
     }
 
     res.send(response)
+}
+
+const preReservationIntent = (req, res) => {
+    const response = {
+        fulfillmentText: [
+              'Vou precisar de alguns dados pessoas, tudo bem ?\n\n'
+            + 'Preciso que informe o seu completo, CPF (com pontuação), data de nascimento e telefone (com pontuação) para contato.'
+        ]
+    }
+
+    res.send(response)
+}
+
+const passengerDataIntent = (req, res) => {
+    const option = req.body.queryResult.outputContexts[1].parameters.option
+    let   seatsGoing
+        , seatsReturn
+
+    switch (option) {
+        case 1:
+            seatsGoing = '9E ou 1F'
+            seatsReturn = '2F'
+            break
+        case 2:
+            seatsGoing = '3B, 8C ou 9C'
+            seatsReturn = '4A'
+            break
+        case 3:
+            seatsGoing = '1A, 8A ou 3F'
+            seatsReturn = '3D'
+            break
+    }
+    const response = {
+        fulfillmentText: [
+            `Por favor escolha sua potrona de ida: ${seatsGoing} e sua poltrona de volta ${seatsReturn}`
+        ]
+    }
+
+    res.send(response)
+}
+
+const seatsIntent = async (req, res) => {
+    try {
+        const option        = req.body.queryResult.outputContexts[0].parameters.option
+            , whereFrom     = req.body.queryResult.outputContexts[0].parameters.whereFrom
+            , whereTo       = req.body.queryResult.outputContexts[0].parameters.whereTo
+            , departureDate = (req.body.queryResult.outputContexts[0].parameters.departureDate).split('T')[0]
+            , returnDate    = (req.body.queryResult.outputContexts[0].parameters.returnDate).split('T')[0]
+            , name          = req.body.queryResult.outputContexts[0].parameters.name.name
+            , cpf           = req.body.queryResult.outputContexts[0].parameters.cpf
+            , birthDate     = (req.body.queryResult.outputContexts[0].parameters.birthDate).split('T')[0]
+            , seatGoing     = req.body.queryResult.outputContexts[0].parameters.seatGoing
+            , seatReturn    = req.body.queryResult.outputContexts[0].parameters.seatReturn
+            , phone         = req.body.queryResult.outputContexts[0].parameters.phone
+        let   price
+            , departureHour
+            , returnHour
+            , company
+
+        switch (option) {
+            case 1:
+                price = 1252.23
+                departureHour = '12:35'
+                returnHour = '18:35'
+                company = 'Azul'
+                break
+            case 2:
+                price = 1322.18
+                departureHour = '08:25'
+                returnHour = '12:35'
+                company = 'Gol'
+                break
+            case 3:
+                price = 1126.49
+                departureHour = '18:30'
+                returnHour = '22:15'
+                company = 'LATAM'
+                break
+        }
+
+        const bodyRequest = {
+              price: price
+            , company: company
+            , whereFrom: whereFrom
+            , cityFrom: 'Origem'
+            , whereTo: whereTo
+            , cityTo: 'Destino'
+            , roundTrip: true
+            , howManyPeople: 1
+            , departureDate: departureDate
+            , departureHour: departureHour
+            , returnDate: returnDate
+            , returnHour: returnHour
+            , passengers: [
+            {
+                  name: name
+                , cpf: cpf
+                , birthDate: birthDate
+                , phone: phone
+                , seatGoing: seatGoing
+                , seatReturn: seatReturn
+            }
+        ]
+        }
+
+        const APIResponse = await reservation(bodyRequest)
+        const flightCode = APIResponse.data.flightCode
+
+        const response = {
+            fulfillmentText: [
+                  `Por favor anote o código ${flightCode}.\n`
+                + 'Futuramente você irá utiliza-lo para fazer checkin e consultas.\n\n'
+                + 'No que mais posso ajudar ?'
+            ]
+        }
+
+        res.send(response)
+    } catch (error) {
+        const errorMsg = {
+            fulfillmentText: [
+                  'Erro ao tentar reservar as passagens:\n'
+                + error.response.data.message
+            ]
+        }
+
+        res.send(errorMsg)
+    }
 }
 
 const main = (req, res) => {
