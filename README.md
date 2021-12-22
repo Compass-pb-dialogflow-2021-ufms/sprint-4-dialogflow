@@ -1,7 +1,8 @@
 # Atividade 2 Sprint 4 - Programa de Bolsas Compass.uol e UFMS
 
 ## Diário de bordo
-//TODO
+Inicio olhando o design do fluxo de como será a conversa do usuario, e integrando as frases ao console do Dialogflow e uso o template anterior de bot para começar.
+Inicializo pelo o fluxo pequeno de ver status do voo onde o usuario deve inserir o flightCode e cpf, utilizo o axios para fazer o post e pego a resposta e formato para exibir os dados mostrados no design de mensagem, que deu tudo certo voltando tudo que precisava. Logo após a daily no periodo a tarde, iniciei o fluxo de fazer check in que consiste quase no mesmo processo mas acresenta o nome completo do usuario. Nesse momento fiz a mesma requisição com o axios.post para a rota /checkin e desta vez a resposta voltada era 500 - Internal Server Error, resolvi testar o fluxo de status de voo e nele agora voltada 500 também, fiquei mais ou menos um 1 dia e meio tentando entender o que poderia ser, troquei os pacotes de requisições para node-fetch e cross-fetch e mesmo assim era voltado o 500 da api. O GET e POST para qualquer outra api estava funcionando mas para a Api da voosCompasso me voltava 500, após mais algumas tentativas e pedidos de ajuda não consegui resolver e por isso esta aplicação está incompleta, apenas com o fluxo de status de voo e check in de voo e não está funcionando suas requests. Termino a jornada de desenvolvimento escrevendo esta documentação e implementando o bot no Telegram.
 
 ## Entrega
 Para iniciar a aplicação, deve-se possuir o Node.JS na maquina.
