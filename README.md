@@ -110,3 +110,9 @@ Caso queira consumir o weebhook, ele está diponível no link: https://exercicio
 22. Abaixe a tela e clique no botão "Save".
 
 23. Após isso, basta usar o bot no "Try it now", disponível no canto superior direito
+
+## Observações 
+
+- Acho que o tratamento de erros nesse trabalho está meio fraco, com certeza algo a ser melhorado no próximo
+
+- Aplicação não está mais respondendo quando necessita usar a API e não está retornando nada para o usuário, possivelmente está dando erro e esse não está sendo retornado (constatei este fato 5 min para o prazo da entrega)
