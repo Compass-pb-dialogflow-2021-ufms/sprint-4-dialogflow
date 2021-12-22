@@ -1,88 +1,41 @@
 
-# Avaliação Sprint 4 - Programa de Bolsas Compass.uol e UFMS
+# Avaliação Sprint 4.2 - Programa de Bolsas Compass.uol e UFMS
 
 Segunda sprint do programa de bolsas Compass.uol para formação em chatbot Dialogflow.
 
+## Diário de bordo
 
-## Execução
+Não consegui desenvolver o que eu espera nessa atividade, mais por conta das minhas decisões. Busquei seguir o fluxo de conversa do Miro (me confundi bastante no tratamento das entidades) demorei muito para assimilar o funcionamento do contexto e dos follow-ups no console do Dialogflow. 
+    Quanto a API, não consegui receber as respotas esperadas exibidas na documentação. Sabido que o /search não estava funcionando, tentei implementar as outras funcionalidas, o /status só retornava o erro 500 - Internal Server Error, o mesmo ocorreu no /checkin. Tentei implementar utilizando o axios, não sei se a causa desses erros foi um problema na minha máquina ou da própria api. Enfim, fica a experiência para as próximas tarefas. 
 
-- Criar BOT em Dialogflow que atenda a necessidade de conversão de moedas;
+## Funcionamento e tecnologias
 
+- A aplicação dá boas vindas para o usuário, e passa informações para o usuário sobre o funcionamento. Por conta do que já foi descrito anteriormente, apenas a funcionalidade de busca de pasagens está parcialmente implementada conforme fluxo de conversa que foi disponibilizado.
+ 
+Primeiramente é necessário que o [Node.JS](https://nodejs.org/en/) e o [Ngrok](https://ngrok.com/) esteja instalado na máquina. 
+  
+  
+  Clone este repositório e no mesmo diretório instale as depenêcias pelo terminal:
 
+  ```
+  npm install
+  ```
 
-## Entrega
-
-- Aceitar o convite do repositório da sprint-4-dialogflow;
-
-- Criar uma branch no repositório com o formato nome-sobrenome-numeroEntrega;
-
-- Subir o trabalho na branch com um readme.md, documentando detalhes sobre como a avaliação foi desenvolvida e como utilizar o sistema.
-
-- O prazo de entrega é até às 13h do dia 17/12 no repositório do github (https://github.com/Compass-pb-dialogflow-2021-ufms/sprint-4-dialogflow).
-
-# Especificação do Bot
-
-Desenvolver um chatbot que seja capaz de informar a cotação e fazer a conversão
-de valores para outras moedas.
-
- - Regras de negócio
-
-O chatbot tem que ser muito intuitivo, pois várias pessoas vão utilizar e testar seus
-serviços (inclusive pessoas leigas em programação).
-
-Conversão monetária: O bot tem que ser capaz de converter qualquer valor em Real (R$) para as outras moedas obrigatórias.
-
-Conversão de qualquer moeda obrigatória para qualquer moeda obrigatória.
-
-Cotação monetária: Para a cotação, o assistente tem que ser capaz de listar a cotação do Real (R$) em todas as moedas obrigatórias. Exemplo: O Real está cotado
-em $ 5,26. Observação: é importante mostrar a última atualização da cotação.
-
-As moedas obrigatórias são:
-- Real
-- Dólar Americano
-- Euro
-- Yen
-- Bitcoin
-
-O chatbot necessita estar integrado com uma API de cotação de moedas. Aqui vai uma sugestão de API de cotação gratuita: https://docs.awesomeapi.com.br/api-de-moedas
-
-Diferenciar a saudação para usuários que já conversaram anteriormente com o bot.
-
-Por exemplo: “Olá novamente fulano!”.
-
-## Intenções
-Abaixo estão intenções que achamos necessárias incluir no chatbot, porém acreditamos que
-ainda faltam incluir algumas. 
-
-Na documentação é importante explicar se as intenções abaixo são suficientes e, se incluir novas intenções, explicar o motivo da inclusão.
-
-Aqui estão as intenções obrigatórias:
-- Saudação (intenção de boas-vindas)
-- Ajuda (por exemplo, mostrar um menu quando o usuário pedir ajuda)
-- Quando o assistente não entender alguma coisa
-
-## Canais de comunicação
-O chatbot deve ter pelo menos 1 canal de comunicação:
-- Telegram;
-- Case não consiga Telegram, integrar no canal Line. Caso não possível, utilizar Dialogflow Messenger;
-
-## Bônus
-
-A tarefa bônus não é obrigatória, mas será muito bem vista se for concluída.
-- Bônus: Integrar nos canais Telegram, Line e Dialogflow Messenger;
-
-## Documentação
-A documentação é um item muito importante em um projeto, portanto, TUDO deve ser documentado. 
-
-Padrão de projeto, arquitetura, intenções, testes, problemas encontrados e suas soluções, etc... 
-
-Descrever detalhadamente cada item.
-
-Seja criativo!
-
-Você tem total liberdade para fazer o projeto da forma que achar melhor. Além disso, fique
-à vontade para implementar novas funcionalidades para agregar valor ao sistema.
+  - Axios para consumir a api externa
+  - Express para tratar das rotas e do servidor
+  - Consign para organizar melhor as rotas 
 
 
-## Entrega
-13:00 - 17/12/2021
+
+  Após a instalação dos pacotes, ainda no terminal, digite
+  ```
+  npm start 
+  ```
+
+  Após ter feito o passo anterior, abra o terminal na pasta onde se encontra o ngrok e digite
+```
+./ngrok http 3000
+  ```
+ Copie o segundo endereço "forwarding" gerado no webhook(ele inicia com https) dentro do fulfillmet do bot no DialogFlow.
+
+ Integrei o chatbot ao Dialogflow Message, para executa-lo basta executar o live server no arquivo index.html que está na raiz do projeto.
