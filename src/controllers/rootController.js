@@ -41,6 +41,11 @@ const switchIntent = (req, res, intent) => {
         case 'Seats Intent':
             seatsIntent(req, res)
             break
+        case 'Pre Checkin Intent':
+            preCheckinIntent(req, res)
+            break
+        case 'Checkin Intent':
+            checkinIntent(req, res)
     }
 }
 
@@ -325,6 +330,49 @@ const seatsIntent = async (req, res) => {
         const errorMsg = {
             fulfillmentText: [
                   'Erro ao tentar reservar as passagens:\n'
+                + error.response.data.message
+            ]
+        }
+
+        res.send(errorMsg)
+    }
+}
+
+const preCheckinIntent = (req, res) => {
+    const response = {
+        fulfillmentText: [
+            'Por favor informe o código do voo, seu nome completo e seu CPF (com pontuação) para realizar o checkin de suas passagens.'
+        ]
+    }
+
+    res.send(response)
+}
+
+const checkinIntent = async (req, res) => {
+    try {
+        const flightCode    = req.body.queryResult.outputContexts[0].parameters.flightCode
+            , name          = req.body.queryResult.outputContexts[0].parameters.person.name
+            , cpf           = req.body.queryResult.outputContexts[0].parameters.cpf
+
+        const bodyRequest = {
+              flightCode: flightCode
+            , name: name
+            , cpf: cpf
+        }
+
+        const APIResponse = await checkin(bodyRequest)
+        const checkinCode = APIResponse.data.checkinCode
+
+        res.send({
+            fulfillmentText: [
+                  `Seu código de checkin é ${checkinCode}, guarde ele com cuidado.\n\n`
+                + 'Ainda posso te ajudar em mais alguma coisa ?'
+            ]
+        })
+    } catch (error) {
+        const errorMsg = {
+            fulfillmentText: [
+                'Erro ao realizar checkin:\n'
                 + error.response.data.message
             ]
         }
