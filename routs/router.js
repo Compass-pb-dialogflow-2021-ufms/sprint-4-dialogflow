@@ -25,7 +25,7 @@ router.post('', async (req, res) =>
     switch (intencao) {
         case 'Welcome':
             const nome = req.body.originalDetectIntentRequest.payload.data.from.first_name
-            res.send(formatedMessage(welcome(nome))) //arrumar texto
+            res.send(formatedMessage(welcome(nome)))
             break
 
 
@@ -42,13 +42,13 @@ router.post('', async (req, res) =>
 
         case 'GetStatus':
             const status = await getStatus(req.body.queryResult.parameters)
-            res.send(formatedMessage(status)) //arrumar texto se req 200
+            res.send(formatedMessage(status))
             break
 
 
         case 'Checkin':
             const checkinCode = await checkin(req.body.queryResult.parameters)
-            res.send(formatedMessage(checkinCode)) //arrumar texto se req 200
+            res.send(formatedMessage(checkinCode))
             break
 
 
@@ -68,7 +68,7 @@ router.post('', async (req, res) =>
 
 
         case 'Help':
-            res.send(formatedMessage(helpMenu())) //arrumar texto
+            res.send(formatedMessage(helpMenu()))
             break
 
 
