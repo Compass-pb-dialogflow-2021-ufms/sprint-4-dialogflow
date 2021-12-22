@@ -1,23 +1,24 @@
-const searchRequest = require('../../modelsAPI/searchRequest')
 const axios = require('axios')
+const searchRequest = require('../../modelsAPI/searchRequest')
 
 
-async function searchFlight()
+async function searchFlight(parameters)
 {
-    const whereFrom = 'Campo Grande'
-    const whereTo = 'Rio de janeiro'
-    const departureDate = '2022-01-01'
-    const roundTrip = true
-    const returnDate = '2022-01-10'
-    const howManyPeople = 2
+    const url = 'https://aerobotapi2.herokuapp.com/search'
+    const departureDate = parameters.departureDate.split('T')
+    const returnDate = parameters.returnDate.split('T')
 
-
-    searchRequest.whereFrom = whereFrom
-    searchRequest.departureDate = departureDate
-    searchRequest.returnDate = returnDate
-    const requestApi = JSON.stringify(searchRequest)
-    const responseApi = await axios.post(`https://compasso-flight.herokuapp.com/api/v1/search`, requestApi)
-    console.log(responseApi)
+    try
+    {
+        const request = searchRequest(parameters, departureDate[0], returnDate[0])
+        const response = await axios.post(url, request)
+        return response.data.chatbot_response
+    }
+    catch(erro)
+    {
+        console.log(erro)
+        return 'Internal server error'
+    }
 }
 
 

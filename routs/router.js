@@ -10,6 +10,7 @@ const secondFallback = require('../dialogflow/intents/fallback/fallback-2')
 const secondFallbackYes = require('../dialogflow/intents/fallback/fallback-2-yes')
 const aboutMe = require('../dialogflow/intents/aboutMe')
 const goodbye = require('../dialogflow/intents/goodbye');
+const getSearchFlightParameters = require('../dialogflow/intents/getSearchFlightParameters')
 
 //Intents with external API call
 const searchFlight = require('../dialogflow/intents/searchFlight')
@@ -26,36 +27,61 @@ router.post('', async (req, res) =>
             const nome = req.body.originalDetectIntentRequest.payload.data.from.first_name
             res.send(formatedMessage(welcome(nome))) //arrumar texto
             break
-        case 'SearchFlight':
-            searchFlight()
-            res.send(formatedMessage('oi')) //arrumar texto e função
+
+
+        case 'GetSearchFlightParameters':
+            res.send(eventTrigger(getSearchFlightParameters()))
             break
-            case 'GetStatus':
+
+
+        case 'SearchFlight':
+            const flight = await searchFlight(req.body.queryResult.parameters)
+            res.send(formatedMessage(flight))
+            break
+
+
+        case 'GetStatus':
             const status = await getStatus(req.body.queryResult.parameters)
             res.send(formatedMessage(status)) //arrumar texto se req 200
             break
-            case 'Checkin':
+
+
+        case 'Checkin':
             const checkinCode = await checkin(req.body.queryResult.parameters)
             res.send(formatedMessage(checkinCode)) //arrumar texto se req 200
             break
+
+
         case 'Fallback':
             res.send(formatedMessage(fallback())) 
             break
+
+
         case 'SecondTimeInFallback':
             res.send(formatedMessage(secondFallback())) 
             break
+
+
         case 'Fallback - 2 - yes':
             res.send(eventTrigger(secondFallbackYes()))
             break
+
+
         case 'Help':
             res.send(formatedMessage(helpMenu())) //arrumar texto
             break
+
+
         case 'KnowAboutMe':
             res.send(formatedMessage(aboutMe())) 
             break
+
+
         case 'Goodbye':
             res.send(formatedMessage(goodbye())) 
             break
+
+
         default:
             break;
         }
