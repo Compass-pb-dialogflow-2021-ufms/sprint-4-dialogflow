@@ -65,11 +65,11 @@ Caso queira consumir o weebhook, ele está diponível no link: https://exercicio
 -> Passo a passo instalação Node.js: https://www.youtube.com/watch?v=Wras1X6rBrc
 -> Página para a instalação do ngrok: https://ngrok.com/download
 
-1. Abra o link: https://github.com/Compass-pb-dialogflow-2021-ufms/sprint-4-dialogflow/tree/horiel-costa-1
+1. Abra o link: https://github.com/Compass-pb-dialogflow-2021-ufms/sprint-4-dialogflow/tree/horiel-costa-2
 
 2. Selecione o botão verde "Code" e faça o download do arquivo ZIP
 
-3. Extraia os dados do arquivo zipado, o que irá gerar uma pasta chamada "sprint-4-dialogflow-horiel-costa-1"
+3. Extraia os dados do arquivo zipado, o que irá gerar uma pasta chamada "sprint-4-dialogflow-horiel-costa-2"
 
 4. Abra o prompt de comando nessa pasta. O vídeo: https://www.youtube.com/watch?v=NZKpDpHL5Bo mostra como navegar entre pastas e usar o prompt de comando
 
@@ -99,13 +99,13 @@ Caso queira consumir o weebhook, ele está diponível no link: https://exercicio
 
 17. Aguarde a criação do bot. Após isso, clique na engrenagem no canto superior esquerdo, vá no menu "Export and Import" e clique no botão "RESTORE FROM ZIP" e após isso no botão "SELECT FILE"
 
-18. Selecione o arquivo "converte.bot.zip" e clique em "Abrir". Esse arquivo é um dos presentes na pasta "sprint-4-dialogflow-horiel-costa-1" do passo 3.
+18. Selecione o arquivo "Hannah.bot.zip" e clique em "Abrir". Esse arquivo é um dos presentes na pasta "sprint-4-dialogflow-horiel-costa-2" do passo 3.
 
 19. Após isso, digite "RESTORE" na caixa de texto indicada e aperte  botão "RESTORE" e depois em "DONE"
 
 20. Aguarde o carregamento e aperte em "Fulfilment", opção do menu do lado esquerdo da tela
 
-21. Em "Webhook" substitua a url "https://exercicio-1-sprint-4.herokuapp.com/cotacoes" pela obtida no passo 14 e adicione no final dela "/cotacoes"
+21. Em "Webhook" substitua a url "https://exercicio-1-sprint-4.herokuapp.com/compassoVoos" pela obtida no passo 14 e adicione no final dela "/compassoVoos"
 
 22. Abaixe a tela e clique no botão "Save".
 
