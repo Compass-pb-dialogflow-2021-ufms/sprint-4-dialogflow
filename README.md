@@ -30,4 +30,7 @@ Descrever detalhadamente cada item.
 Seja criativo!
 
 Você tem total liberdade para fazer o projeto da forma que achar melhor. Além disso, fique
-à vontade para implementar novas funcionalidades para agregar valor ao sistema!
+à vontade para implementar novas funcionalidades para agregar valor ao sistema.
+
+## Entrega
+13:00 - 17/12/2021
